@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Carattere&family=Pacifico&display=swap');
+
+
+body {
+  background: #155984;
+  color: #121015;
+  font-family: "Raleway", sans-serif;
+}
+
+header {
+  background: #edf6f9;
+  text-align: center;
+  padding: 40px;
+}
+
+header h1 {
+  font-weight: 300;
+  font-size: 24px;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+main {
+  background: #edf6f9;
+  padding: 20px;
+}
+
+main div {
+  background: #c0e297;
+  padding: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+footer {
+  font-weight: 600;
+  text-align: center;
+  background: #e2f0c4;
+  color: #e29578;
+  padding: 40px;
+  border-top: 2px solid #e29578;
+
+}
+
+@media (min-width: 650px) {
+  main {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  main p {
+    width: 100%;
+  }
+
+  main div {
+    width: calc(33.3333% - 50px);
+  }
+
+
+}
+
+.apresbi {
+  font-family: 'Pacifico', cursive;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 80px;
+  /* background-color: #ff9500; */
+  color: #000000;
+  border-radius: 16px;
+  padding: 100px 0;
+}
+
+
+
+
