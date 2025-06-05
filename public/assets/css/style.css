@@ -1,66 +1,160 @@
+/* Importing Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
+/* GENERAL LAYOUT ------------------------------------------ */
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #cbe7f3, #f6e7fb);
+  background: linear-gradient(135deg, #fad0c4, #ffd1ff);
   color: #333;
   margin: 0;
-  padding: 20px;
-  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: background 0.5s ease-in-out;
 }
 
-header, footer {
-  text-align: center;
-  margin-bottom: 20px;
+/* HEADER -------------------------------------------------- */
+.main-header.modern {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
 }
 
-main {
-  max-width: 420px;
-  margin: auto;
-}
-
-/* Input & Button */
-input#cityInput {
-  width: 70%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #b2c9d3;
-  margin-bottom: 12px;
-  font-size: 16px;
-}
-
-button {
-  padding: 12px 16px;
-  border: none;
-  border-radius: 8px;
-  background-color: #99d4eb;
+.app-name {
+  font-size: 22px;
+  font-weight: 600;
   color: #fff;
+}
+
+/* TIME BLOCK ---------------------------------------------- */
+.time-info {
+  text-align: center;
+  font-size: 15px;
+  opacity: 0.8;
+  margin: 8px 0 24px;
+}
+
+/* MAIN CENTERED BOX --------------------------------------- */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+/* MODERN UI CARD ------------------------------------------ */
+#weathering-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.option-selector.modern-ui {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px);
+  padding: 32px;
+  border-radius: 24px;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.prompt {
+  font-size: 20px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+/* CITY INPUT ---------------------------------------------- */
+.option-selector input#cityInput {
+  width: calc(100% - 32px);
+  max-width: 300px;
+  margin: 0 auto 28px;
+  padding: 16px;
+  border-radius: 50px;
+  border: none;
   font-size: 16px;
-  margin-left: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-button:hover {
-  background-color: #77c1e0;
+/* BUTTON COLUMN ------------------------------------------- */
+.button-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
-/* Main Weather Container */
-.app-container {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+.button-column button {
+  width: calc(100% - 32px);
+  max-width: 300px;
+  padding: 12px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
 }
 
+.button-column .fill {
+  background: #fff;
+  color: #333;
+  border: none;
+}
+
+.button-column .outline {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.fill:hover,
+.outline:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+/* OR DIVIDER --------------------------------------------- */
+.or-label {
+  color: #999;
+  font-size: 14px;
+  margin: 0;
+  position: relative;
+}
+
+.or-label::before,
+.or-label::after {
+  content: "";
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: #ccc;
+  vertical-align: middle;
+  margin: 0 8px;
+}
+
+/* WEATHER INFO PAGE -------------------------------------- */
 .top-section {
   text-align: center;
   margin-bottom: 24px;
 }
 
 .temp-card {
-  background: #e1f1f8;
+  background: rgba(255, 255, 255, 0.67);
   padding: 20px;
   border-radius: 20px;
   position: relative;
@@ -85,36 +179,133 @@ button:hover {
   color: #555;
 }
 
-/* Buttons Group */
-.info-buttons {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 30px 0;
-}
-
-.info-buttons button {
-  background: #d0e8f2;
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 12px;
-  color: #333;
-  border: 1px solid #c0dce6;
-}
-
-.info-buttons button:hover {
-  background-color: #c1deec;
-}
-
-/* Extra Info */
 .astro-info {
   text-align: center;
   font-size: 14px;
   color: #444;
+  margin-top: 24px;
 }
 
 .moon-icon {
   width: 24px;
   vertical-align: middle;
   margin-left: 6px;
+}
+
+/* FIXED BACK BUTTON --------------------------------------- */
+.back-home-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  border-radius: 40px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.back-home-button button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.back-home-button button:hover {
+  opacity: 0.85;
+}
+
+/* FOOTER ------------------------------------------------- */
+footer {
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+}
+
+/* WEATHER DASHBOARD GRID --------------------------------- */
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.weather-grid .card {
+  background-color: rgba(255, 255, 255, 0.87);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.weather-grid .city-temp h1 {
+  font-size: 48px;
+  margin: 8px 0;
+  color: #408ac9;
+}
+
+.weather-grid .card img {
+  width: 48px;
+  margin-top: 8px;
+}
+
+.weather-grid .moon-icon {
+  width: 24px;
+  margin-top: 6px;
+}
+
+/* RESPONSIVE: MOBILE FIXES ------------------------------- */
+@media (max-width: 480px) {
+  .app-name {
+    font-size: 20px;
+  }
+
+  .prompt {
+    font-size: 18px;
+  }
+
+  .option-selector input#cityInput,
+  .button-column button {
+    width: calc(100% - 32px);
+  }
+
+  .temp-card h1 {
+    font-size: 48px;
+  }
+
+  .weather-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .weather-grid .card {
+    padding: 16px;
+  }
+
+  .weather-grid .card h1 {
+    font-size: 32px;
+  }
+
+  footer {
+    font-size: 13px;
+    padding-bottom: 20px;
+  }
 }
