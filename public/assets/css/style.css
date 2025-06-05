@@ -2,8 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
 /* GENERAL LAYOUT ------------------------------------------ */
-body {
+
+/* FONT */
+main, body, p, h1, input, button, input:placeholder-shown{
   font-family: 'Inter', sans-serif;
+}
+
+
+body {
   background: linear-gradient(135deg, #fad0c4, #ffd1ff);
   color: #333;
   margin: 0;
@@ -20,7 +26,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  padding: 16px 20px;
+  padding: 30px 20px;
 }
 
 .app-name {
@@ -35,6 +41,13 @@ body {
   font-size: 15px;
   opacity: 0.8;
   margin: 8px 0 24px;
+  display: flex;
+  gap: 10px;
+}
+
+.time-info img {
+  width: 10px;
+  height: auto;
 }
 
 /* MAIN CENTERED BOX --------------------------------------- */
@@ -80,13 +93,13 @@ main {
 
 /* CITY INPUT ---------------------------------------------- */
 .option-selector input#cityInput {
-  width: calc(100% - 32px);
+  width: calc(100% - 80px);
   max-width: 300px;
-  margin: 0 auto 28px;
+  margin: 0 16px 20px;
   padding: 16px;
   border-radius: 50px;
   border: none;
-  font-size: 16px;
+  font-size: 14px;
   background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
@@ -195,35 +208,56 @@ main {
 /* FIXED BACK BUTTON --------------------------------------- */
 .back-home-button {
   position: fixed;
-  bottom: 20px;
+  bottom: 180px;
+  /* Adjusted to avoid overlap with footer/content */
   left: 50%;
   transform: translateX(-50%);
-  background: #222;
-  border-radius: 40px;
-  padding: 10px 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(245, 245, 245, 0.5));
+  /* Gradient for depth */
+  -webkit-backdrop-filter: blur(12px);
+  /* Blur for Safari */
+  backdrop-filter: blur(12px);
+  /* Standard blur */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* Subtle border for contrast */
+  border-radius: 50px;
+  /* Slightly rounder for a modern look */
+  padding: 12px 90px;
+  /* Reduced width for better mobile fit */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  /* Enhanced shadow for lift */
   z-index: 999;
+  font-size: 16px;
+  font-weight: 600;
+  /* Slightly bolder text */
 }
 
 .back-home-button button {
   background: none;
   border: none;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  width: 100%;
+  /* Ensure full width of container */
+  justify-content: center;
+  /* Center align text and icon */
 }
 
 .back-home-button button:hover {
   opacity: 0.85;
+  /* Subtle hover effect */
+}
+
+.back-home-button button span {
+  font-size: 18px;
+  /* Icon size */
 }
 
 /* FOOTER ------------------------------------------------- */
 footer {
-  padding: 10px 16px;
+  padding: 30px 16px;
   text-align: center;
   font-size: 14px;
   color: #888;
@@ -265,12 +299,38 @@ footer {
 }
 
 /* Desktop Layout: Two rows, three cards each */
-.weather-grid .city-temp {
+.weather-grid .card.city-temp {
   grid-column: 1;
   grid-row: 1;
-  min-height: 180px;
+  max-height: 180px;
   background: linear-gradient(135deg, rgba(64, 138, 201, 0.9), rgba(64, 138, 201, 0.6));
   color: #fff;
+  display: flex;
+  flex-direction: row; /* Horizontal layout */
+  align-items: center; /* Vertically center content */
+  justify-content: center; /* Evenly space the elements */
+}
+
+.weather-grid .city-temp div {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center text */
+}
+
+.weather-grid .city-temp img {
+  width: 48px;
+  margin: 0 8px; /* Space around the icon */
+}
+
+.weather-grid .city-temp h1 {
+  font-size: 48px;
+  margin: 0; /* Remove default margin */
+  color: #fff;
+}
+
+.weather-grid .city-temp p {
+  margin: 0; /* Remove default margin */
+  font-size: 18px;
 }
 
 .weather-grid .condition-text {
@@ -301,12 +361,6 @@ footer {
   grid-column: 3;
   grid-row: 2;
   min-height: 180px;
-}
-
-.weather-grid .city-temp h1 {
-  font-size: 48px;
-  margin: 8px 0;
-  color: #fff;
 }
 
 .weather-grid .card img {
@@ -355,6 +409,24 @@ footer {
   .weather-grid .card img {
     width: 36px;
   }
+  .weather-grid .card.city-temp {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    max-height: 180px;
+  }
+
+  /* CITY INPUT ---------------------------------------------- */
+.option-selector input#cityInput {
+  width: calc(100% - 32px);
+  max-width: 185px;
+  max-height: 12px;
+}
+
+.back-home-button {
+  bottom: 19px;
+  padding: 12px 25px;
+}
+
 }
 
 /* RESPONSIVE: MOBILE FIXES ------------------------------- */
@@ -388,20 +460,48 @@ footer {
   .weather-grid .city-temp {
     grid-column: 1 / 3;
     grid-row: 1;
-    min-height: 120px;
+    min-height: 80px; /* Reduced height */
+    display: flex;
+    flex-direction: row; /* Horizontal layout */
+    align-items: center;
+    justify-content: space-between; /* Space between icon and text */
+    padding: 12px;
+  }
+
+  /* Style the content inside city-temp */
+  .weather-grid .city-temp img {
+    width: 40px; /* Smaller icon for mobile */
+    margin-top: 0; /* Remove top margin */
+    margin-right: 12px; /* Space between icon and text */
+  }
+
+  .weather-grid .city-temp div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align text to the left */
+  }
+
+  .weather-grid .city-temp h1 {
+    font-size: 28px;
+    margin: 0; /* Remove default margin */
+  }
+
+  .weather-grid .city-temp p {
+    margin: 0; /* Remove default margin */
+    font-size: 16px;
   }
 
   /* Second row: Date and Condition side by side (smaller height) */
   .weather-grid .condition-text {
     grid-column: 2;
     grid-row: 2;
-    min-height: 60px; /* Reduced height */
+    min-height: 60px;
   }
 
   .weather-grid .date-block {
     grid-column: 1;
     grid-row: 2;
-    min-height: 60px; /* Reduced height */
+    min-height: 60px;
   }
 
   /* Third row: Sunrise and Sunset side by side */
@@ -426,10 +526,6 @@ footer {
 
   .weather-grid .card {
     padding: 10px;
-  }
-
-  .weather-grid .city-temp h1 {
-    font-size: 28px;
   }
 
   .weather-grid .card img {

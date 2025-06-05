@@ -19,14 +19,15 @@ function showWeatherOptions() {
   weatherContainer.innerHTML = `
     <div class="time-info">
       <p>${formattedDate}</p>
+      <img src="assets/images/star.svg" alt="Star icon" class="sun-icon" />
       <p>${formattedTime}</p>
     </div>
     <div class="option-selector modern-ui">
-      <p class="prompt">What's your location or city?</p>
+      <p class="prompt">What's Your City?</p>
       <input type="text" id="cityInput" placeholder="Start typing a city..." />
       <div class="button-column">
-        <button class="fill" onclick="WeatheringToday('manual')">Search City</button>
-        <p class="or-label">— or —</p>
+        <button class="fill" onclick="WeatheringToday('manual')">Search</button>
+        <p class="or-label">or</p>
         <button class="outline" onclick="WeatheringToday('location')">Use My Location</button>
       </div>
     </div>
@@ -102,8 +103,10 @@ async function WeatheringToday(method = 'location') {
     placeHolder.innerHTML = `
       <div class="weather-grid">
         <div class="card city-temp">
-          <p>${cityName}</p>
-          <h1>${tempC}°</h1>
+          <div>
+            <p>${cityName}</p>
+            <h1>${tempC}°</h1>
+          </div>  
           <img src="https:${iconWeather}" alt="${textWeather}" />
         </div>
         <div class="card condition-text">
@@ -132,7 +135,7 @@ async function WeatheringToday(method = 'location') {
     const backButton = document.createElement("div");
     backButton.className = "back-home-button";
     backButton.innerHTML = `
-      <button onclick="showWeatherOptions()">Home</button>
+      <button onclick="showWeatherOptions()">Back to search</button>
     `;
     document.body.appendChild(backButton);
 
