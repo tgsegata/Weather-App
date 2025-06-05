@@ -271,6 +271,12 @@ footer {
   margin-top: 6px;
 }
 
+.sun-icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 6px;
+}
+
 /* RESPONSIVE: MOBILE FIXES ------------------------------- */
 @media (max-width: 480px) {
   .app-name {
