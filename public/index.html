@@ -16,35 +16,31 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
 
+<body>
     <header>
         <h1>Weathering Website</h1>
     </header>
 
+    <!-- main page -->
     <main>
         <p>An app for you to know the weather.</p>
-
 
         <input type="text" id="cityInput" placeholder="Enter a city" />
         <button onclick="WeatheringToday()">Check Weather</button>
 
-
-        <div id="weathering-info">
+        <div class="app-container" id="weathering-info">
             Loading...
         </div>
+    </main>
 
+    <!-- footer -->
+    <footer>
+        <p>&copy; 2024</p>
+    </footer>
 
-
-
-
-
-        <footer>
-            <p>&copy; 2024</p>
-        </footer>
-
-        <!-- connection js -->
-        <script src="main.js"></script>
+    <!-- connection js -->
+    <script src="main.js"></script>
 </body>
 
 </html>
