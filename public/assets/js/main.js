@@ -42,44 +42,38 @@ function showWeatherOptions() {
 async function WeatheringToday(method = 'location') {
   let city = "";
 
-  // If user chose manual input, get the city value from input field
   if (method === 'manual') {
-    city = document.getElementById("cityInput").value;
+    city = document.getElementById("cityInput").value.trim();
     if (!city) {
       alert("Please enter a city.");
       return;
     }
   } else {
-    // Otherwise, try to get the user's coordinates via Geolocation API
     try {
       const location = await getUserLocation();
       city = `${location.lat},${location.lon}`;
     } catch (error) {
       city = "Toronto"; // fallback if geolocation fails
+      console.warn("Geolocation failed, using Toronto:", error);
     }
   }
 
-  // Set API key and build the full request URL
   const apiKey = "59320ff7bbb247e0b88222430252905";
-  const apiUrl = `https://api.weatherapi.com/v1/marine.json?q=${encodeURIComponent(city)}&key=${apiKey}`;
+  const apiUrl = `https://api.weatherapi.com/v1/forecast.json?q=${encodeURIComponent(city)}&days=1&key=${apiKey}`; // Changed to forecast.json for weather data
 
   try {
-    // Request data from WeatherAPI
     const apiRes = await fetch(apiUrl);
     const result = await apiRes.json();
 
-    // Extract necessary data
     const cityName = result.location.name;
-    const regionName = result.location.region;
     const dateToday = result.forecast.forecastday[0].date;
+    const tempC = result.forecast.forecastday[0].day.avgtemp_c; // Using average temp for consistency
     const iconWeather = result.forecast.forecastday[0].day.condition.icon;
     const textWeather = result.forecast.forecastday[0].day.condition.text;
-    const iconTime = result.forecast.forecastday[0].hour[0].condition.icon;
     const sunrise = result.forecast.forecastday[0].astro.sunrise;
     const sunset = result.forecast.forecastday[0].astro.sunset;
     const moonPhase = result.forecast.forecastday[0].astro.moon_phase;
 
-    // Map moon phase names to corresponding SVG filenames
     const moonIcons = {
       "New Moon": "new.svg",
       "Waxing Crescent": "waxing-crescent.svg",
@@ -91,7 +85,6 @@ async function WeatheringToday(method = 'location') {
       "Waning Crescent": "waning-crescent.svg"
     };
 
-    // Set dynamic background based on weather condition text
     const body = document.body;
     if (textWeather.includes("Sunny") || textWeather.includes("Clear")) {
       body.style.background = "linear-gradient(135deg, #ffe57f, #ffb347)";
@@ -105,42 +98,30 @@ async function WeatheringToday(method = 'location') {
       body.style.background = "linear-gradient(135deg, #fad0c4, #ffd1ff)";
     }
 
-    // Build weather info cards inside a grid layout
     const placeHolder = document.querySelector("#weathering-info");
     placeHolder.innerHTML = `
       <div class="weather-grid">
-        <!-- Temperature Card -->
         <div class="card city-temp">
           <p>${cityName}</p>
-          <h1>${result.forecast.forecastday[0].day.maxtemp_c}°</h1>
-          <img src="${iconWeather}" alt="${textWeather}" />
+          <h1>${tempC}°</h1>
+          <img src="https:${iconWeather}" alt="${textWeather}" />
         </div>
-
-        <!-- Weather Condition -->
         <div class="card condition-text">
           <p>${textWeather}</p>
         </div>
-
-        <!-- Date Card -->
         <div class="card date-block">
           <p>${dateToday}</p>
         </div>
-
-        <!-- Sunrise Card -->
         <div class="card sunrise-card">
           <img src="assets/images/sunrise.svg" alt="Sunrise icon" class="sun-icon" />
           <p>Sunrise</p>
           <p>${sunrise}</p>
         </div>
-
-        <!-- Sunset Card -->
         <div class="card sunset-card">
           <img src="assets/images/sunset.svg" alt="Sunset icon" class="sun-icon" />
           <p>Sunset</p>
           <p>${sunset}</p>
         </div>
-
-        <!-- Moon Phase Card -->
         <div class="card moon-info">
           <p>Moon: ${moonPhase}</p>
           <img class="moon-icon" src="assets/images/${moonIcons[moonPhase] || 'default.svg'}" alt="Moon phase icon" />
@@ -148,18 +129,14 @@ async function WeatheringToday(method = 'location') {
       </div>
     `;
 
-    // Add a floating back-to-home button
     const backButton = document.createElement("div");
     backButton.className = "back-home-button";
     backButton.innerHTML = `
-      <button onclick="showWeatherOptions()">
-        <span style="font-size: 18px">🏠</span> Home
-      </button>
+      <button onclick="showWeatherOptions()">Home</button>
     `;
     document.body.appendChild(backButton);
 
   } catch (error) {
-    // If API fails or something goes wrong
     document.querySelector("#weathering-info").innerHTML = `<p>Weather data not available.</p>`;
     console.error("API error:", error);
   }
